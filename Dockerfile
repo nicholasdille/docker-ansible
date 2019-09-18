@@ -27,7 +27,7 @@ RUN apk update\
  		pip \
 		setuptools \
  && pip install \
- 		'ansible>=2.7,<2.8' \
+ 		'ansible>=2.8,<2.9' \
 		netaddr \
 		pbr \
 		hvac \
