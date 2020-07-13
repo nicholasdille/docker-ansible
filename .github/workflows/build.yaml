@@ -3,7 +3,7 @@ name: build
 on:
   push:
     branches:
-    - master
+    - "*"
   schedule:
   - cron:  '0 7 * * *'
 
@@ -25,5 +25,4 @@ jobs:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
         repository: nicholasdille/ansible
-        tags: latest
         tag_with_ref: true
