@@ -23,6 +23,7 @@ RUN apk update\
 		py3-pip \
 		py3-yaml \
 		ca-certificates \
+		patch \
  && pip3 install --upgrade \
  		pip \
 		setuptools \
