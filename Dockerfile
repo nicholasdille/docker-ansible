@@ -6,7 +6,7 @@ RUN apk update\
 		musl-dev \
 		libffi-dev \
 		openssl-dev \
-		python-dev \
+		python3-dev \
  && apk add \
 		bash \
 		curl \
@@ -14,16 +14,17 @@ RUN apk update\
 		openssh-client \
 		sshpass \
 		git \
-		python \
-		py-boto \
-		py-dateutil \
-		py-httplib2 \
-		py-jinja2 \
-		py-paramiko \
-		py-pip \
-		py-yaml \
+		python3 \
+		py3-boto \
+		py3-dateutil \
+		py3-httplib2 \
+		py3-jinja2 \
+		py3-paramiko \
+		py3-pip \
+		py3-yaml \
 		ca-certificates \
- && pip install --upgrade \
+		patch \
+ && pip3 install --upgrade \
  		pip \
 		setuptools \
  && pip install \

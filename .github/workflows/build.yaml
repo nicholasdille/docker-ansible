@@ -3,7 +3,12 @@ name: build
 on:
   push:
     branches:
-    - "*"
+      - 'master'
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - 'master'
   schedule:
   - cron:  '30 7 6 * *'
 
@@ -16,13 +21,31 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v2
-    
-    - name: Build and push image
-      env:
-        DOCKER_BUILDKIT: 1
-      uses: docker/build-push-action@v1
+
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v3
+      with:
+        images: nicholasdille/ansible
+
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v1
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to DockerHub
+      uses: docker/login-action@v1 
       with:
         username: ${{ secrets.DOCKER_HUB_USERNAME }}
         password: ${{ secrets.DOCKER_HUB_PASSWORD }}
-        repository: nicholasdille/ansible
-        tag_with_ref: true
+
+    - name: Build and push
+      id: docker_build
+      uses: docker/build-push-action@v2
+      with:
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=registry,ref=nicholasdille/ansible:latest
+        cache-to: type=inline
+        push: ${{ github.event_name != 'pull_request' }}
