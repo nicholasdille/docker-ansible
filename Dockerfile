@@ -28,7 +28,7 @@ RUN apk update\
  		pip \
 		setuptools \
  && pip3 install \
- 		ansible \
+ 		ansible==3.4 \
 		netaddr \
 		pbr \
 		hvac \
