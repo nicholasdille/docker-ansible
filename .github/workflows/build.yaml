@@ -44,6 +44,6 @@ jobs:
       with:
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
-        cache-from: type=registry,ref=nicholasdille/ansible:latest
+        cache-from: type=registry,ref=nicholasdille/ansible:3.4
         cache-to: type=inline
         push: ${{ github.event_name != 'pull_request' }}
